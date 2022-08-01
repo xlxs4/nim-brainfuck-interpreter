@@ -36,8 +36,8 @@ when isMainModule:
 
       elif not skip:
         case code[codePos]
-        of '+': xinc tape[codePos]
-        of '-': xdec tape[codePos]
+        of '+': xinc tape[tapePos]
+        of '-': xdec tape[tapePos]
         of '>': inc tapePos
         of '<': dec tapePos
         of '.': stdout.write tape[tapePos]
