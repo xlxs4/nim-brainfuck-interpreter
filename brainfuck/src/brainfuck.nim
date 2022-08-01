@@ -1,14 +1,6 @@
-# This is just an example to get you started. A typical binary package
-# uses this file as the main entry point of the application.
-
-when isMainModule:
-  import os
-
-  let code = if paramCount() > 0: readFile paramStr(1)
-             else: readAll stdin
-  
-  echo code
-
+proc interpret*(code: string) =
+  ## Interprets the brainfuck `code` string,
+  ## reading from stdin and writing to stdout.
   var
     tape = newSeq[char]()
     codePos = 0
@@ -23,17 +15,13 @@ when isMainModule:
     while tapePos >= 0 and codePos < code.len:
       if tapePos >= tape.len:
         tape.add '\0'
-
       if code[codePos] == '[':
         inc codePos
         let oldPos = codePos
-
         while run(tape[tapePos] == '\0'):
           codePos = oldPos
-      
-      elif code[codePos] == '[':
+      elif code[codePos] == ']':
         return tape[tapePos] != '\0'
-
       elif not skip:
         case code[codePos]
         of '+': xinc tape[tapePos]
@@ -47,3 +35,13 @@ when isMainModule:
       inc codePos
 
   discard run()
+
+when isMainModule:
+  import os
+
+  echo "Welcome to brainfuck"
+
+  let code = if paramCount() > 0: readFile paramStr(1)
+             else: readAll stdin
+
+  interpret code
