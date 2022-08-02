@@ -79,13 +79,31 @@ macro compileFile*(filename: string): typed =
   compile staticRead(filename.strVal)
 
 when isMainModule:
-  echo "Welcome to brainfuck"
+  import docopt, tables
 
   proc mandelbrot = compileFile "../examples/mandelbrot.b"
-  mandelbrot()
 
-  # import os
-  # let code = if paramCount() > 0: readFile paramStr(1)
-  #            else: readAll stdin
+  let doc = """
+  brainfuck
 
-  # interpret code
+  Usage:
+    brainfuck mandelbrot
+    brainfuck interpret [<file.b>]
+    brainfuck (-h | --help)
+    brainfuck (-v | --version)
+
+  Options:
+    -h --help     Show this screen.
+    -v --version  Show version.
+  """
+
+  let args = docopt(doc, version = "brainfuck 0.1")
+
+  if args["mandelbrot"]:
+    mandelbrot()
+
+  elif args["interpret"]:
+    let code = if args["<file.b>"]: readFile($args["<file.b>"])
+              else: readAll stdin
+    
+    interpret(code)
