@@ -7,7 +7,6 @@ jobs:
     steps:
       - checkout
       - run: |
-          cd nim-brainfuck-interpreter
           nimble build -y
           nimble test -y
 
