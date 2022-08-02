@@ -1,21 +1,12 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-     - image: nimlang/nim
-    steps:
-        - run: ls
-  test:
-    docker:
-     - image: nimlang/nim
-    steps:
-        - run: nimble test -y
-
-workflows:
   build_and_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+    docker:
+     - image: nimlang/nim
+    steps:
+      - checkout
+      - run: |
+          cd nim-brainfuck-interpreter
+          nimble build -y
+          nimble test -y
