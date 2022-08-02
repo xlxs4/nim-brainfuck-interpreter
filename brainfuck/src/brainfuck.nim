@@ -48,7 +48,6 @@ proc compile(code: string): NimNode {.compiletime.} =
     stmts[stmts.high].add parseStmt(text)
 
   addStmt "var tape: array[1_000_000, char]"
-  addStmt "var codePos = 0"
   addStmt "var tapePos = 0"
 
   for c in code:
