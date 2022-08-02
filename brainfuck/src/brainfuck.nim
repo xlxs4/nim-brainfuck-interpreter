@@ -9,8 +9,8 @@ proc readCharEOF*(input: Stream): char =
     result = '\255'  # BF assumes EOF to be -1
 
 {.push overflowchecks: off.}
-proc xinc(c: var char) = inc c
-proc xdec(c: var char) = dec c
+proc xinc*(c: var char) = inc c
+proc xdec*(c: var char) = dec c
 {.pop.}
 
 proc interpret*(code: string; input, output: Stream) =
@@ -66,7 +66,7 @@ import macros
 proc compile(code, input, output: string): NimNode {.compiletime.} =
   var stmts = @[newStmtList()]
 
-  template addStmt(text): typed =
+  template addStmt(text) =
     stmts[stmts.high].add parseStmt(text)
 
   addStmt """
@@ -99,7 +99,7 @@ proc compile(code, input, output: string): NimNode {.compiletime.} =
 
   result = stmts[0]
 
-macro compileString*(code: string; input, output: untyped): typed =
+macro compileString*(code: string; input, output: untyped) =
   ## Compiles the brainfuck code read from `filename` at compile time
   ## into Nim code that reads from the `input` variable and
   ## writes to the `output` variable, both strings.
@@ -107,12 +107,12 @@ macro compileString*(code: string; input, output: untyped): typed =
     "newStringStream(" & $input & ")", "newStringStream()")
   result.add parseStmt($output & " = outStream.data")
 
-macro compileString*(code: string): typed =
+macro compileString*(code: string) =
   ## Compiles the brainfuck `code` string into Nim code
   ## that reads from stdin and writes to stdout.
   compile($code, "stdin.newFileStream", "stdout.newFileStream")
 
-macro compileFile*(filename: string; input, output: untyped): typed =
+macro compileFile*(filename: string; input, output: untyped) =
   ## Compiles the brainfuck code read from `filename` at compile time
   ## into Nim code that reads from the `input` variable
   ## and writes to the `output` variable, both strings.
@@ -120,7 +120,7 @@ macro compileFile*(filename: string; input, output: untyped): typed =
     "newStringStream(" & $input & ")", "newStringStream()")
   result.add parseStmt($output & " = outStream.data")
 
-macro compileFile*(filename: string): typed =
+macro compileFile*(filename: string) =
   ## Compiles the brainfuck code read from `filename` at compile time
   ## into Nim code that reads from stdin and writes to stdout.
   compile(staticRead(filename.strVal),
