@@ -10,3 +10,8 @@ jobs:
           cd nim-brainfuck-interpreter
           nimble build -y
           nimble test -y
+
+workflows:
+  build_and_test:
+    jobs:
+      - build_and_test
