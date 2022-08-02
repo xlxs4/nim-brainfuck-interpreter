@@ -5,7 +5,7 @@ jobs:
     docker:
      - image: nimlang/nim
     steps:
-        - run: nimble build -y
+        - run: ls
   test:
     docker:
      - image: nimlang/nim
@@ -16,4 +16,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
