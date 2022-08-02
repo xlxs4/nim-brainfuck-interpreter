@@ -1,6 +1,6 @@
 <div align="center">
 
-# `nim-brainfuck-interpreter`
+## `nim-brainfuck-interpreter`
 
 <h3>
   Toy brainfuck interpreter written in <code>nim👑</code>
@@ -11,17 +11,13 @@
 
 </div>
 
-# Description 📖
+### Description
 
-It's a small [brainfuck](https://www.wikiwand.com/en/Brainfuck) interpreter written fully in `nim👑`.
-
-This is a toy project made to get my feet wet with nim, as a first experience with the language.
-
-If you have any suggestions regarding the source code, feel free to open an issue.
+It's a small [brainfuck](https://www.wikiwand.com/en/Brainfuck) interpreter written fully in `nim👑`. This is a toy project made to get my feet wet with nim, as a first experience with the language. If you have any suggestions regarding the source code, feel free to open an issue.
 
 <br>
 
-# Usage
+### Usage
 
 Usage:
 ```
@@ -39,7 +35,7 @@ Options:
 
 <br>
 
-# Building
+### Building
 
 1. install [nim](https://nim-lang.org/)
 2. `git clone https://github.com/xlxs4/nim-brainfuck-interpreter.git`
@@ -50,7 +46,7 @@ After that you will get a ready-made binary file in the root directory of the pr
 
 <br>
 
-# File architecture
+### File architecture
 ```fish
 nim-brainfuck-interpreter
 ├── brainfuck
