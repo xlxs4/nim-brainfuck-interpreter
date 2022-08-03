@@ -1,21 +1,54 @@
+## :Author: [xlxs4](https://github.com/xlxs4)
+## :Version: 0.1.0
+##
+## ## Description 
+## 
+## This is a toy interpreter for the [brainfuck](https://www.wikiwand.com/en/Brainfuck)
+## programming language written fully in Nim.
+## It doubles as a compiler of brainfuck into efficient Nim code.
+## 
+## ----
+##
+## Example:
+##
+## .. code:: nim
+##   import brainfuck, streams
+##
+##   interpret("++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.")
+##   # Prints "Hello"
+##
+##   proc mandelbrot = compileFile("examples/mandelbrot.b")
+##   mandelbrot() # Draws a mandelbrot set in ASCII
+
 import streams
 
 when not defined(nimnode):
-  type NimNode = PNimrodNode
+  type NimNode = PNimrodNode # Backwards compatibility
 
 proc readCharEOF*(input: Stream): char =
+  ## Read a character from `input` stream and return a Unix EOF (-1).
+  ## This is necessary because brainfuck assumes Unix EOF while `streams` use \0 for EOF.
   result = input.readChar
   if result == '\0': # Streams return 0 for EOF
     result = '\255'  # BF assumes EOF to be -1
 
 {.push overflowchecks: off.}
 proc xinc*(c: var char) = inc c
+  ## Increment a character with wrapping instead of overflow checks.
 proc xdec*(c: var char) = dec c
+  ## Decrement a character with wrapping instead of underflow checks.
 {.pop.}
 
 proc interpret*(code: string; input, output: Stream) =
-  ## Interprets the brainfuck `code` string,
-  ## reading from stdin and writing to stdout.
+  ## Interpret the brainfuck `code` string, reading from the `input`
+  ## and writing to the `output` stream.
+  ##
+  ## Example:
+  ##
+  ## .. code:: nim
+  ##   var inpStream = newStringStream("Hello World!\n")
+  ##   var outStream = newFileStream(stdout)
+  ##   interpret(readFile("examples/rot13.b"), inpStream, outStream)
   var
     tape = newSeq[char]()
     codePos = 0
@@ -50,15 +83,25 @@ proc interpret*(code: string; input, output: Stream) =
   discard run()
 
 proc interpret*(code, input: string): string =
-  ## Interprets the brainfuck `code` string,
-  ## reading from `input` and returning the result directly.
+  ## Interpret the brainfuck `code` string, reading from the `input`
+  ## and returning the result directly.
+  ##
+  ## Example:
+  ##
+  ## .. code:: nim
+  ##   echo interpret(readFile("examples/rot13.b"), "Hello World!\n")
   var outStream = newStringStream()
   interpret(code, input.newStringStream, outStream)
   result = outStream.data
 
 proc interpret*(code: string) =
-  ## Interprets the brainfuck `code` string,
-  ## reading from stdin and writing to stdout
+  ## Interpret the brainfuck `code`,
+  ## reading from stdin and writing to stdout.
+  ##
+  ## Example:
+  ##
+  ## .. code:: nim
+  ##   interpret(readFile("examples/rot13.b"))
   interpret(code, stdin.newFileStream, stdout.newFileStream)
 
 import macros
@@ -100,29 +143,42 @@ proc compile(code, input, output: string): NimNode {.compiletime.} =
   result = stmts[0]
 
 macro compileString*(code: string; input, output: untyped) =
-  ## Compiles the brainfuck code read from `filename` at compile time
-  ## into Nim code that reads from the `input` variable and
-  ## writes to the `output` variable, both strings.
+  ## Compile the brainfuck `code` read from `filename` at compile time into Nim
+  ## code that reads from the `input` variable and writes to the `output`
+  ## variable, both of which have to be strings.
   result = compile($code,
     "newStringStream(" & $input & ")", "newStringStream()")
   result.add parseStmt($output & " = outStream.data")
 
 macro compileString*(code: string) =
-  ## Compiles the brainfuck `code` string into Nim code
+  ## Compile the brainfuck `code` string into Nim code
   ## that reads from stdin and writes to stdout.
   compile($code, "stdin.newFileStream", "stdout.newFileStream")
 
 macro compileFile*(filename: string; input, output: untyped) =
-  ## Compiles the brainfuck code read from `filename` at compile time
-  ## into Nim code that reads from the `input` variable
-  ## and writes to the `output` variable, both strings.
+  ## Compile the brainfuck code read from `filename` at compile time into Nim
+  ## code that reads from the `input` variable and writes to the `output`
+  ## variable, both of which have to be strings.
+  ##
+  ## Example:
+  ##
+  ## .. code-block:: nim
+  ##   proc rot13(input: string): string =
+  ##     compileFile("examples/rot13.b", input, result)
+  ##   echo rot13("Hello World!\n")
   result = compile(staticRead(filename.strVal),
     "newStringStream(" & $input & ")", "newStringStream()")
   result.add parseStmt($output & " = outStream.data")
 
 macro compileFile*(filename: string) =
-  ## Compiles the brainfuck code read from `filename` at compile time
+  ## Compile the brainfuck code read from `filename` at compile time
   ## into Nim code that reads from stdin and writes to stdout.
+  ##
+  ## Example:
+  ##
+  ## .. code-block:: nim
+  ##   proc mandelbrot = compileFile("examples/mandelbrot.b")
+  ##   mandelbrot()
   compile(staticRead(filename.strVal),
           "stdin.newFileStream", "stdout.newFileStream")
 
