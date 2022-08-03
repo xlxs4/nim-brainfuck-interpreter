@@ -7,7 +7,6 @@ jobs:
     steps:
       - checkout
       - run: |
-          cd brainfuck
           rm src/brainfuck.nim.cfg
           nimble build -y
           nimble test -y
