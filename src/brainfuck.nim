@@ -1,5 +1,7 @@
 ## :Author: [xlxs4](https://github.com/xlxs4)
 ## :Version: 0.1.0
+## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/brBanner.png
 ##
 ## ## Description 
 ## 
