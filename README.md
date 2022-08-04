@@ -2,9 +2,17 @@
 
 <img src="assets/brBanner.png">
 
+</div>
+
+---
+
+<div align="center">
+
 [![xlxs4](https://circleci.com/gh/xlxs4/nim-brainfuck-interpreter.svg?style=shield)](https://circleci.com/gh/xlxs4/nim-brainfuck-interpreter)
 
 </div>
+
+---
 
 ### Description
 
