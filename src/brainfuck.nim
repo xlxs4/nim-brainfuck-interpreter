@@ -64,6 +64,8 @@
 ## - `[`: If the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it *forward* to the command after the *matching* `]` command
 ## - `]`: If the byte at the data pointer is *non*zero, then instead of moving the instruction pointer forward to the next command, jump it *back* to the command after the *matching* `[` command
 ## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/mandelbrot-brainfuck.gif
+## 
 ## ## Usage
 ## 
 ## Usage:
