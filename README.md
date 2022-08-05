@@ -22,6 +22,8 @@ It doubles as a [transpiler](https://www.wikiwand.com/en/Source-to-source_compil
 This is a toy project made to get my feet wet with nim, as a first experience with the language.
 If you have any suggestions regarding the source code, feel free to open an issue.
 
+TODO: https://xlxs4.github.io/nim-brainfuck-interpreter/
+
 ---
 
 Example:

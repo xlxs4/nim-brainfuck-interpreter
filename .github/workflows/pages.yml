@@ -30,6 +30,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Generate docs
+        run: cp src/brainfuck.nim src/index.nim && nim doc --docRoot:${PWD}/src --outdir:docs src/index.nim && rm -rf src/index.nim
       - name: Setup Pages
         uses: actions/configure-pages@v1
       - name: Upload artifact
