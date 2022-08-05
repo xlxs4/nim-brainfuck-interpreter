@@ -27,8 +27,33 @@
 ## Brainfuck is a very small esoteric programming language.
 ## It's one of the most famous esoteric languages and has inspired many esoteric programming language creators.
 ## 
-## Brainfuck only consists of eight simple commands, a data pointer and an instruction pointer (program counter).
+## Brainfuck only consists of eight simple commands.
+## It operates on a tape (array) of memory cells, each initially set to zero:
+## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/memory-tape.png
+## 
+## There's also a pointer, initially pointing to the first cell:
+## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/memory-tape-pointer.png
+## 
+## In other words, there's a data pointer and an instruction pointer (program counter).
 ## The commands are the following:
+## 
+## - `>`: Move the pointer to the right
+## - `<`: Move the pointer to the left
+## - `+`: Increment the memory cell at the pointer
+## - `-`: Decrement the memory cell at the pointer
+## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/instructions-a.png
+## 
+## - `.`: Output the character signified by the cell at the pointer
+## - `,`: Input a character and store it in the cell at the pointer
+## - `[`: Jump *past* the *matching* `]` if the cell at the pointer is zero
+## - `]`: Jump *back* to the *matching* `[` if the cell at the pointer is *non*zero
+## 
+## .. image:: https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/instructions-b.png
+## 
+## Or, if you want to be more technical:
 ## 
 ## - `>`: Increment the data pointer (to point to the next cell to the right)
 ## - `<`: Decrement the data pointer (to point to the next cell to the left)

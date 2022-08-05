@@ -174,7 +174,20 @@ window.addEventListener('DOMContentLoaded', main);
 <span class="Keyword">proc</span> <span class="Identifier">mandelbrot</span> <span class="Operator">=</span> <span class="Identifier">compileFile</span><span class="Punctuation">(</span><span class="StringLit">&quot;examples/mandelbrot.b&quot;</span><span class="Punctuation">)</span>
 <span class="Identifier">mandelbrot</span><span class="Punctuation">(</span><span class="Punctuation">)</span> <span class="Comment"># Draws a mandelbrot set in ASCII</span></pre>
 <h2><a class="toc-backref" id="introduction" href="#introduction">Introduction</a></h2><p>Brainfuck is a very small esoteric programming language. It's one of the most famous esoteric languages and has inspired many esoteric programming language creators.</p>
-<p>Brainfuck only consists of eight simple commands, a data pointer and an instruction pointer (program counter). The commands are the following:</p>
+<p>Brainfuck only consists of eight simple commands. It operates on a tape (array) of memory cells, each initially set to zero:</p>
+<img src="https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/memory-tape.png"/><p>There's also a pointer, initially pointing to the first cell:</p>
+<img src="https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/memory-tape-pointer.png"/><p>In other words, there's a data pointer and an instruction pointer (program counter). The commands are the following:</p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Operator">&gt;</span></span></tt>: Move the pointer to the right</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Operator">&lt;</span></span></tt>: Move the pointer to the left</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Operator">+</span></span></tt>: Increment the memory cell at the pointer</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Operator">-</span></span></tt>: Decrement the memory cell at the pointer</li>
+</ul>
+<img src="https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/instructions-a.png"/><ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Operator">.</span></span></tt>: Output the character signified by the cell at the pointer</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Punctuation">,</span></span></tt>: Input a character and store it in the cell at the pointer</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Punctuation">[</span></span></tt>: Jump <em>past</em> the <em>matching</em> <tt class="docutils literal"><span class="pre"><span class="Punctuation">]</span></span></tt> if the cell at the pointer is zero</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Punctuation">]</span></span></tt>: Jump <em>back</em> to the <em>matching</em> <tt class="docutils literal"><span class="pre"><span class="Punctuation">[</span></span></tt> if the cell at the pointer is <em>non</em>zero</li>
+</ul>
+<img src="https://raw.githubusercontent.com/xlxs4/nim-brainfuck-interpreter/master/assets/instructions-b.png"/><p>Or, if you want to be more technical:</p>
 <ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Operator">&gt;</span></span></tt>: Increment the data pointer (to point to the next cell to the right)</li>
 <li><tt class="docutils literal"><span class="pre"><span class="Operator">&lt;</span></span></tt>: Decrement the data pointer (to point to the next cell to the left)</li>
 <li><tt class="docutils literal"><span class="pre"><span class="Operator">+</span></span></tt>: Increment the byte at the data pointer</li>
@@ -316,7 +329,7 @@ Compile the brainfuck <tt class="docutils literal"><span class="pre"><span class
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-05 14:35:43 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-08-05 15:48:56 UTC</small>
       </div>
     </div>
   </div>
