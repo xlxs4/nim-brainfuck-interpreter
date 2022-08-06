@@ -90,6 +90,27 @@
 ## 4. `nimble build`
 ##
 ## After that you will get a ready-made binary file in the root directory of the project.
+## 
+## ## Examples
+## - `collatz.b`: Receives number as input, outputs the number of steps from that number to zero or one, following the rules of the [Collatz conjecture](https://www.wikiwand.com/en/Collatz_conjecture).
+## - `dbf2c.b`: Translates brainfuck to C.
+## - `dbfi.b`: Brainfuck interpreter, in brainfuck. ... I know, right? Right !?
+## - `factorial.b`: Computes and outputs the factorials ([A000132 OEIS](https://oeis.org/A000142)).
+## - `helloworld.b`: Outputs "Hello World!".
+## - `impeccable.b`: Computes and outputs the impeccable sequence ([A014221 OEIS](http://oeis.org/A014221)).
+## - `jabh.b`: Outputs "Just another brainfuck hacker,". Based on [JAPH](https://www.wikiwand.com/en/Just_another_Perl_hacker).
+## - `life.b`: Simulates the [Game of Life](https://www.wikiwand.com/en/Conway%27s_Game_of_Life) cellular automaton. It duplicates the interface of the classic program at http://www.linusakesson.net/programming/brainfuck/index.php.
+## - `mandelbrot.b`: Outputs an ASCII interpretation of the [Mandelbrot set](https://www.wikiwand.com/en/Mandelbrot_set).
+## - `numwrap.b`: Receives a number as input, outputs that number, well, wrapped?
+## - `prime.b`: Receives a number as input, outputs all the prime numbers up to the input number.
+## - `random.b`: A [RNG](https://www.wikiwand.com/en/Random_number_generation).
+## - `rot13.b`: Receives input, outputs the input transformed using the [ROT13](https://www.wikiwand.com/en/ROT13) version of the Ceasar cipher.
+## - `sierpinski.b`: Outputs an ASCII interpretation of the [Sierpinski triangle](https://www.wikiwand.com/en/Sierpi%C5%84ski_triangle).
+## - `squares-endless.b`: Outputs the square numbers.
+## - `squares.b`: Outputs square numbers from 0 to 10000.
+## - `thuemorse.b`: Outputs the [Thue-Morse sequence](http://www.research.att.com/projects/OEIS?Anum=A010060).
+## - `tictactoe.b`: Plays tic-tac-toe, after the first move which is already given.
+## - `utm.b`: A [universal Turing machine (UTM)](https://www.wikiwand.com/en/Universal_Turing_machine) from Yurii Rogozhin's article "Small universal Turing machines", in Theoretical Computer Science, 168(2):215-240, 20 November 1996.
 ##
 
 
