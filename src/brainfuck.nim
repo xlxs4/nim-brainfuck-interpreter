@@ -92,6 +92,7 @@
 ## After that you will get a ready-made binary file in the root directory of the project.
 ## 
 ## ## Examples
+##
 ## - `collatz.b`: Receives number as input, outputs the number of steps from that number to zero or one, following the rules of the [Collatz conjecture](https://www.wikiwand.com/en/Collatz_conjecture).
 ## - `dbf2c.b`: Translates brainfuck to C.
 ## - `dbfi.b`: Brainfuck interpreter, in brainfuck. ... I know, right? Right !?
@@ -111,6 +112,15 @@
 ## - `thuemorse.b`: Outputs the [Thue-Morse sequence](http://www.research.att.com/projects/OEIS?Anum=A010060).
 ## - `tictactoe.b`: Plays tic-tac-toe, after the first move which is already given.
 ## - `utm.b`: A [universal Turing machine (UTM)](https://www.wikiwand.com/en/Universal_Turing_machine) from Yurii Rogozhin's article "Small universal Turing machines", in Theoretical Computer Science, 168(2):215-240, 20 November 1996.
+## 
+## ## Tests
+##
+## The pre-defined `test` Nimble task is used: see [here](https://github.com/nim-lang/nimble#tests).
+## There are three test files: `tbf.nim`, `tcompile.nim` and `tinterpret.nim`:
+## 
+## - `tbf.nim` tests that the implemented tape is at least 30000 cells long, as per the original standard, and for various obscure problems in brainfuck implementations (thanks http://brainfuck.org/tests.b!).
+## - `tcompile.nim` uses the `helloworld.b` and `rot13.b` examples to test the transpiler.
+## - `tinterpret.nim` uses the `helloworld.b` and `rot13.b` examples to test the interpreter.
 ##
 
 
